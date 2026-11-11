@@ -1,0 +1,13 @@
+#!/bin/bash
+# Blocks the commit if any staged .sh file has a syntax error
+echo "pre-commit: checking shell scripts..."
+for file in $(git diff --cached --name-only | grep '\.sh$'); do
+  if [ -f "$file" ]; then
+    if ! bash -n "$file"; then
+      echo "ERROR: syntax error in $file. Commit blocked."
+      exit 1
+    fi
+  fi
+done
+echo "pre-commit: all scripts OK"
+exit 0

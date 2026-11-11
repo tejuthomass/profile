@@ -1,0 +1,3 @@
+#!/bin/bash
+# Confirms the commit after it is saved
+echo "post-commit: commit saved -> $(git log -1 --oneline)"
